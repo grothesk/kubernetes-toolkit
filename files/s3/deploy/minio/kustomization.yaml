@@ -1,0 +1,7 @@
+namespace: minio
+
+resources:
+ - namespace.yaml
+ - persistentvolumeclaim.yaml
+ - deployment.yaml
+ - service.yaml

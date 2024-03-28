@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-files-on-local-storage
+spec:
+  template:
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:latest
+        command: ["/bin/sh"]
+        args:
+          - "-c"
+          - "echo test > /local-storage/test.txt && echo \"another test\" > /local-storage/another-test.txt"
+        volumeMounts:
+        - name: local-storage 
+          mountPath: /local-storage
+      volumes:
+      - name: local-storage 
+        persistentVolumeClaim:
+          claimName: local-storage
+      restartPolicy: Never
+  backoffLimit: 3
