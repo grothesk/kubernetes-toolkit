@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{replaced with MLflow Project name}"
+  namespace: user-a
+  labels:
+    kueue.x-k8s.io/queue-name: user-a
+spec:
+  ttlSecondsAfterFinished: 100
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+        - name: "{replaced with MLflow Project name}"
+          image: "{replaced with URI of Docker image created during Project execution}"
+          env: 
+            - name: MLFLOW_TRACKING_USERNAME
+              value: user
+            - name: MLFLOW_TRACKING_PASSWORD
+              value: YxoSKTvuKk
+          #   - name: KUBE_MLFLOW_TRACKING_URI
+          #     value: "http://mlflow-tracking.mlflow.svc.cluster.local"
+          command: ["{replaced with MLflow Project entry point command}"]
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
+      restartPolicy: Never

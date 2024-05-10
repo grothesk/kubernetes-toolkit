@@ -1,0 +1,5 @@
+{
+    "kube-context": "toolkit",
+    "kube-job-template-path": "kubernetes_job_template.yaml",
+    "repository-uri": "quay.io/maltegroth/mlflow-kubernetes-example"
+}

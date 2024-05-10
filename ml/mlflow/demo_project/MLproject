@@ -1,0 +1,11 @@
+name: mlflow-kubernetes-example
+
+docker_env:
+  image:  quay.io/maltegroth/mlflow-kubernetes-example
+
+entry_points:
+  main:
+    parameters:
+      alpha: {type: float, default: 0.5}
+      l1_ratio: {type: float, default: 0.1}
+    command: "python train.py --alpha {alpha} --l1-ratio {l1_ratio}"
