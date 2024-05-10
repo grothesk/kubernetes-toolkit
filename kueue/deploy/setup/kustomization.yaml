@@ -1,0 +1,7 @@
+resources:
+- resource-flavor.yaml
+- cluster-queue.yaml
+- namespace-user-a.yaml
+- namespace-user-b.yaml
+- local-queue-user-a.yaml
+- local-queue-user-b.yaml
