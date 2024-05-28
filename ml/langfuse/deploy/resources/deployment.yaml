@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: langfuse
+  name: langfuse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: langfuse
+  template:
+    metadata:
+      labels:
+        app: langfuse
+    spec:
+      containers:
+      - image: ghcr.io/langfuse/langfuse:latest
+        name: langfuse
+        envFrom:
+        - secretRef:
+            name: langfuse-config
+        - configMapRef:
+            name: langfuse-config
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /api/public/health
+            port: http
