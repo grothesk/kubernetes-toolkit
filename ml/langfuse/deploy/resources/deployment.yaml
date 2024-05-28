@@ -14,6 +14,10 @@ spec:
       labels:
         app: langfuse
     spec:
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox
+        command: ['sh', '-c', 'until nc -z db-postgresql 5432; do echo "Waiting for postgres..."; sleep 1; done;']
       containers:
       - image: ghcr.io/langfuse/langfuse:latest
         name: langfuse
